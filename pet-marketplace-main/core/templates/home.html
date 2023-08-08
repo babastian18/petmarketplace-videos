@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - {{username}}
+{% endblock %}
+
+{% block content %}
+
+<div class="flex-container">
+
+    <div class="flex-child">
+        <!-- Form to select type of pet to buy -->
+        <form action="{{url_for('view.buy_pet')}}" method="POST">
+            <input type="hidden" id="username" name="username" value="{{username}}">
+            <h2>Please select a pet to buy:</h2>
+            <input type="radio" id="dog" name="pet" value="dog">
+            <label for="dog">Dog</label><br>
+            <input type="radio" id="cat" name="pet" value="cat">
+            <label for="cat">Cat</label><br><br>
+            <input type="submit" value="Buy">
+        </form>
+    </div>
+
+    <div class="flex-child">
+        <h2>Pets Owned:</h2>
+        <!-- Display list of pets owned by the current user in an ordered list -->
+        <ol>
+            {% for pet in pets %}
+            <li>{{pet.type}} : {{pet.serial_number}} ( {{pet.sound}} )</li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+
+<html>
+<head>
+    <title>Contoh Video HTML</title>
+</head>
+<body>
+    <h1>Contoh Video HTML</h1>
+    <video controls autoplay width="640" height="360">
+        <!-- Ganti "path-to-your-video" dengan jalur ke video Anda -->
+        <source src="{{ url_for('static', filename='videos/cat1.mp4') }}" type="video/mp4">
+        <!-- Tambahkan <source> tag di atas sesuai dengan format video yang Anda miliki (mp4, webm, ogg, dll.) -->
+        Maaf, peramban Anda tidak mendukung video.
+    </video>
+    <video controls autoplay width="640" height="360">
+        <source src="{{ url_for('static', filename='videos/doggie1.mp4') }}" type="video/mp4">
+    </video>
+</body>
+</html>
+{% endblock %}
